@@ -1,15 +1,15 @@
-import React from 'react';
+import React, {Component} from 'react';
 
-export const Header = () => {
-    const getTheYear = () => {
-        const newDate = new Date();
-
-        return newDate.getFullYear();
+// class based component
+export class Header extends Component {
+    render() {
+        return (
+            <header>
+                <div>
+                    Logo
+                </div>
+                <input />
+            </header>
+        )
     }
-
-    return (
-        <div>
-            The date is {getTheYear()}
-        </div>
-    )
 }
