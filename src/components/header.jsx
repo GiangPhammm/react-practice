@@ -1,15 +1,12 @@
-import React, {Component} from 'react';
+import React from 'react';
 
-// class based component
-export class Header extends Component {
-    render() {
-        return (
-            <header>
-                <div>
-                    Logo
-                </div>
-                <input />
-            </header>
-        )
-    }
+export const Header = () => {
+    return (
+        <header>
+            <div className='logo'>
+                Logo
+            </div>
+            <input />
+        </header>
+    )
 }
