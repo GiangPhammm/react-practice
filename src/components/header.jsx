@@ -2,28 +2,22 @@ import React, {useState} from 'react';
 
 export const Header = () => {
     const [state, setState] = useState({
-        name: 'Francis',
-        title: 'The keywords are',
+        active: 'active',
         keywords: '',
-        count: 0,
     });
 
     const inputChangeHandler = (event) => {
-        setState((prevState) => ({
-            ...prevState,
+        const value = event.target.value === '' ? 'active' : 'not-active';
+
+        setState(() => ({
+            active: value,
             keywords: event.target.value
         }));
     }
 
-    const addOne = () => {
-        setState((prevState) => ({
-            ...prevState,
-            count: prevState.count + 1
-        }));
-    }
-
     return (
-        <header>
+        // <header style={{background: `${state.active ? 'red' : 'blue'}`}}>
+        <header className={state.active}>
             <div className='logo'>
                 Logo
             </div>
