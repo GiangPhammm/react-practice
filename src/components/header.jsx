@@ -22,8 +22,6 @@ export const Header = () => {
         }));
     }
 
-    console.log(state)
-
     return (
         <header>
             <div className='logo'>
