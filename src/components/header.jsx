@@ -1,29 +1,16 @@
 import React, {useState} from 'react';
 
-export const Header = () => {
-    const [state, setState] = useState({
-        active: 'active',
-        keywords: '',
-    });
-
-    const inputChangeHandler = (event) => {
-        const value = event.target.value === '' ? 'active' : 'not-active';
-
-        setState(() => ({
-            active: value,
-            keywords: event.target.value
-        }));
-    }
-
+// Functional components use much less resources
+// Class-based components are more powerful
+export const Header = (props) => {
     return (
-        // <header style={{background: `${state.active ? 'red' : 'blue'}`}}>
-        <header className={state.active}>
+        <header>
             <div className='logo'>
                 Logo
             </div>
             <input
-                onChange={inputChangeHandler}
+                onChange={props.keywords}
             />
         </header>
     );
-};
+}; 
