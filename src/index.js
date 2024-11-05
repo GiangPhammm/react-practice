@@ -8,7 +8,7 @@ import './styles/style.css';
 import JSON from './db.json';
 
 const App = () => {
-    const initialState = {
+    const state = {
         news: JSON,
         footerText: 'I am a happy footer'
     }
@@ -16,10 +16,11 @@ const App = () => {
     return (
         <>
             <Header />
-            <NewList
-                news={initialState.news}
-            />
-            <Footer footerText={initialState.footerText} />
+            <NewList news={state.news}>
+                <br />
+                <h1>I am children</h1>
+            </NewList>
+            <Footer footerText={state.footerText} />
         </>
     );
 }

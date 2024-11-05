@@ -30,14 +30,6 @@ export const Header = () => {
             <input
                 onChange={inputChangeHandler}
             />
-            <div>{state.title}</div>
-            <div>{state.keywords}</div>
-
-            <br />
-            <div>{state.count}</div>
-            <button onClick={() => addOne()}>
-                Add one
-            </button>
         </header>
     );
 };

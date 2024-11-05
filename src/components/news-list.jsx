@@ -11,6 +11,7 @@ export const NewList = (props) => {
                     item={item}
                 />
             ))}
+            {props.children}
         </>
     )
 }
