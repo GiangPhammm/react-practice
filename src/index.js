@@ -9,7 +9,7 @@ import {Life} from './components/lifecycle';
 import './styles/style.css';
 import JSON from './db.json';
 
-const App = (props) => {
+const App = ({initialCount}) => {
     const [state, setState] = useState({
         news: JSON,
         filtered: JSON,
@@ -17,7 +17,23 @@ const App = (props) => {
         active: true,
     });
 
-    const [number, setNumber] = useState(props.initialCount);
+    const [number, setNumber] = useState(initialCount);
+
+    const [count, setCount] = useState({
+        number: initialCount,
+        user: 'Francis',
+    })
+
+    const [posts, setPost] = useState([
+        {
+            name: 'Super awesome post',
+            body: 'The content of the post',
+        },
+        {
+            name: 'React is cool',
+            body: 'Something else',
+        }
+    ])
 
     const getKeywords = (event) => {
         const keywords = event.target.value.toLowerCase();
@@ -29,6 +45,18 @@ const App = (props) => {
             ...prevState,
             filtered,
         }));
+    }
+
+    const addPost = () => {
+        const newPost = {
+            name: 'PHP is still awesome',
+            body: 'Something about php',
+        };
+
+        setPost([
+            ...posts,
+            newPost,
+        ])
     }
     
     return (
@@ -51,10 +79,33 @@ const App = (props) => {
                 Action
             </button>
 
-            <h3>Count: {number}</h3>
-            <button onClick={() => setNumber(number+1)}>Add One</button>
-            <button onClick={() => setNumber(number-1)}>Rest One</button>
-            <button onClick={() => setNumber(props.initialCount)}>Reset</button>
+            <h1>{count.user}</h1>
+            <h3>Count: {count.number}</h3>
+            <button onClick={() => setCount({
+                ...count,
+                number: count.number+1
+            })}>
+                Add One
+            </button>
+            <button onClick={() => setCount({
+                ...count,
+                number: count.number-1
+            })}>
+                Rest One
+            </button>
+            <button onClick={() => setCount({number: initialCount})}>Reset</button>
+
+            <hr />
+
+            {posts.map((item, index) => (
+                <div key={`${item}-${index}`}>
+                    <div>Name: {item.name}</div>
+                    <div>Body: {item.body}</div>
+                    <hr />
+                </div>
+            ))}
+
+            <button onClick={addPost}>Add post</button>
 
             <Footer footerText={state.footerText} />
         </>
