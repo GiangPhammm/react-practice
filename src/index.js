@@ -9,13 +9,15 @@ import {Life} from './components/lifecycle';
 import './styles/style.css';
 import JSON from './db.json';
 
-const App = () => {
+const App = (props) => {
     const [state, setState] = useState({
         news: JSON,
         filtered: JSON,
         footerText: 'I am a happy footer',
         active: true,
     });
+
+    const [number, setNumber] = useState(props.initialCount);
 
     const getKeywords = (event) => {
         const keywords = event.target.value.toLowerCase();
@@ -49,7 +51,10 @@ const App = () => {
                 Action
             </button>
 
-            <h3>Count: 0</h3>
+            <h3>Count: {number}</h3>
+            <button onClick={() => setNumber(number+1)}>Add One</button>
+            <button onClick={() => setNumber(number-1)}>Rest One</button>
+            <button onClick={() => setNumber(props.initialCount)}>Reset</button>
 
             <Footer footerText={state.footerText} />
         </>
@@ -60,4 +65,4 @@ const App = () => {
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-root.render(<App />);
+root.render(<App initialCount={0}/>);
