@@ -49,6 +49,8 @@ const App = () => {
                 Action
             </button>
 
+            <h3>Count: 0</h3>
+
             <Footer footerText={state.footerText} />
         </>
     );
