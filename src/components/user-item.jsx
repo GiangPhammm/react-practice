@@ -5,11 +5,21 @@ import {Context} from '../context';
 export const UserItem = () => {
     const context = useContext(Context);
 
-    console.log(context);
-
     return (
         <>
-            User Item
+            {context.active ?
+                context.users.map((item) => (
+                    <div key={item.id}>
+                        {item.name}
+                    </div>
+                ))
+            : null
+            }
+
+            <hr />
+            <button onClick={context.toggleActive}>
+                Toggle Active
+            </button>
         </>
     );
 };
