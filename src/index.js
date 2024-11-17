@@ -1,118 +1,32 @@
 import React from 'react';
-import {useState, useEffect} from 'react';
+import {useState, useCallback} from 'react';
 import ReactDOM from 'react-dom/client';
 
-import {Header} from './components/header';
-import {NewList} from './components/news-list';
-import {Footer} from './components/footer';
-import {Life} from './components/lifecycle';
-import {Post} from './components/posts';
-import './styles/style.css';
-import JSON from './db.json';
+import Title from './components/title';
+import Count from './components/count';
+import CountButton from './components/count-button';
+import Age from './components/age';
+import AgeButton from './components/age-button';
 
-const App = ({initialCount}) => {
-    const [state, setState] = useState({
-        news: JSON,
-        filtered: JSON,
-        footerText: 'I am a happy footer',
-        active: true,
-    });
+const App = () => {
+    const [count, setCount] = useState(0);
+    const [age, setAge] = useState(10);
 
-    const [number, setNumber] = useState(initialCount);
+    const incrementCount = useCallback(() => {
+        setCount(prevCount => prevCount+1)
+    }, []);
 
-    const [count, setCount] = useState({
-        number: initialCount,
-        user: 'Francis',
-    })
+    const incrementAge = useCallback(() => {
+        setAge(prevAge => prevAge+1)
+    }, []);
 
-    const [posts, setPost] = useState([
-        {
-            name: 'Super awesome post',
-            body: 'The content of the post',
-        },
-        {
-            name: 'React is cool',
-            body: 'Something else',
-        }
-    ]);
-
-    const getKeywords = (event) => {
-        const keywords = event.target.value.toLowerCase();
-        const filtered = state.news.filter((item) => 
-            item.title.toLowerCase().includes(keywords)
-        );
-
-        setState((prevState) => ({
-            ...prevState,
-            filtered,
-        }));
-    };
-
-    const addPost = () => {
-        const newPost = {
-            name: 'PHP is still awesome',
-            body: 'Something about php',
-        };
-
-        setPost([
-            ...posts,
-            newPost,
-        ])
-    };
-
-    const removePost = () => {
-        setPost([]);
-    };
-    
     return (
         <>
-            <Header keywords={getKeywords} />
-         
-
-            {state.active ?
-                <Life />
-                :
-                null
-            }
-            
-            <button
-                onClick={() => setState((prevState) => ({
-                    ...prevState,
-                    active: !state.active,
-                }))}
-            >
-                Action
-            </button>
-
-            <h1>{count.user}</h1>
-            <h3>Count: {count.number}</h3>
-            <button onClick={() => setCount({
-                ...count,
-                number: count.number+1
-            })}>
-                Add One
-            </button>
-            <button onClick={() => setCount({
-                ...count,
-                number: count.number-1
-            })}>
-                Rest One
-            </button>
-            <button onClick={() => setCount({number: initialCount})}>Reset</button>
-
-            <hr />
-
-            {posts.map((item, index) => (
-                <Post
-                    key={`${item}-${index}`}
-                    item={item}
-                />
-            ))}
-
-            <button onClick={addPost}>Add post</button>
-            <button onClick={removePost}>Remove post</button>
-
-            <Footer footerText={state.footerText} />
+            <Title />
+            <Count count={count} />
+            <CountButton handleCount={incrementCount} />
+            <Age age={age} />
+            <AgeButton handleAge={incrementAge} />
         </>
     );
 };
