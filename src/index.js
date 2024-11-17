@@ -1,11 +1,12 @@
 import React from 'react';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import ReactDOM from 'react-dom/client';
 
 import {Header} from './components/header';
 import {NewList} from './components/news-list';
 import {Footer} from './components/footer';
 import {Life} from './components/lifecycle';
+import {Post} from './components/posts';
 import './styles/style.css';
 import JSON from './db.json';
 
@@ -33,7 +34,7 @@ const App = ({initialCount}) => {
             name: 'React is cool',
             body: 'Something else',
         }
-    ])
+    ]);
 
     const getKeywords = (event) => {
         const keywords = event.target.value.toLowerCase();
@@ -45,7 +46,7 @@ const App = ({initialCount}) => {
             ...prevState,
             filtered,
         }));
-    }
+    };
 
     const addPost = () => {
         const newPost = {
@@ -57,7 +58,11 @@ const App = ({initialCount}) => {
             ...posts,
             newPost,
         ])
-    }
+    };
+
+    const removePost = () => {
+        setPost([]);
+    };
     
     return (
         <>
@@ -98,21 +103,19 @@ const App = ({initialCount}) => {
             <hr />
 
             {posts.map((item, index) => (
-                <div key={`${item}-${index}`}>
-                    <div>Name: {item.name}</div>
-                    <div>Body: {item.body}</div>
-                    <hr />
-                </div>
+                <Post
+                    key={`${item}-${index}`}
+                    item={item}
+                />
             ))}
 
             <button onClick={addPost}>Add post</button>
+            <button onClick={removePost}>Remove post</button>
 
             <Footer footerText={state.footerText} />
         </>
     );
-}
-
-
+};
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
