@@ -8,6 +8,9 @@ import CountButton from './components/count-button';
 import Age from './components/age';
 import AgeButton from './components/age-button';
 
+import {User} from './components/user';
+import {Provider} from './context';
+
 const App = () => {
     const [count, setCount] = useState(0);
     const [age, setAge] = useState(10);
@@ -27,17 +30,24 @@ const App = () => {
 
     return (
         <>
+
             <Title />
             <Count count={count} />
             <CountButton handleCount={incrementCount} />
             <Age age={age} />
             <AgeButton handleAge={incrementAge} />
 
+            <hr />
             <h2>Form: </h2>
             <InputComponent ref={textInput}/>
             <button onClick={triggerHandler}>
                 Trigger
             </button>
+
+            <hr />
+            <Provider>
+                <User />
+            </Provider>
         </>
     );
 };
