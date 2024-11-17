@@ -1,8 +1,6 @@
 import React from 'react';
 
 const CountButton = ({handleCount}) => {
-    console.log('3-count button');
-
     return (
         <>
             <button onClick={handleCount}>
